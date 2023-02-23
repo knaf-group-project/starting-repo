@@ -36,7 +36,8 @@ const syncTables = async()=> {
     );
 
     CREATE TABLE times(
-      id SERIAL PRIMARY KEY
+      id SERIAL PRIMARY KEY,
+      availability TIME UNIQUE NOT NULL
       );
 
       CREATE TABLE cart_products (
