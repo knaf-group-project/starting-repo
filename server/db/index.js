@@ -10,8 +10,11 @@ const syncTables = async()=> {
   try{
     console.log("Dropping any existing tables...");
     await client.query(`
-    DROP TABLE IF EXISTS users;
+    DROP TABLE IF EXISTS times;
+    DROP TABLE IF EXISTS cart_products;
+    DROP TABLE IF EXISTS cart;
     DROP TABLE IF EXISTS EscapeRooms;
+    DROP TABLE IF EXISTS users;
   `);
   
   await client.query(`
@@ -25,6 +28,19 @@ const syncTables = async()=> {
       id SERIAL PRIMARY KEY,
       name VARCHAR(255) UNIQUE NOT NULL,
       description TEXT
+    );
+    CREATE TABLE cart(
+      id SERIAL PRIMARY KEY,
+      “buyerId” INTEGER REFERENCES users(id)
+    );
+    CREATE TABLE cart_products (
+      id SERIAL PRIMARY KEY,
+      "EscapeRoomsId" INTEGER REFERENCES EscapeRooms(id),
+      "checkoutId" INTEGER REFERENCES cart(id),
+      UNIQUE ("EscapeRoomsId", "checkoutId")
+    );
+    CREATE TABLE times(
+      id SERIAL PRIMARY KEY
     );
   `);
     console.log("Tables created!");
