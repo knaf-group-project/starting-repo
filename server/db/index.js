@@ -1,4 +1,8 @@
 const client = require('./client');
+const { createEscapeRooms } = require('./EscapeRooms');
+const { createCart } = require('./cart')
+const { addProductsToCart } = require('./cart_products')
+
 const {
   getUserByToken,
   createUser,
@@ -34,8 +38,6 @@ const syncTables = async()=> {
       “buyerId” INTEGER REFERENCES users(id)
     );
 
-    
-
       CREATE TABLE cart_products (
         id SERIAL PRIMARY KEY,
         "EscapeRoomsId" INTEGER REFERENCES EscapeRooms(id),
@@ -50,21 +52,69 @@ const syncTables = async()=> {
   }
 }
 
+async function createInitialUsers() {
+  console.log("Starting to create users...");
+  try {
+    const usersToCreate = [
+      {  username: 'moe',  password: 'moe_password'},
+      { username: 'lucy',  password: 'lucy_password' },
+    ];
+    const users = await Promise.all(usersToCreate.map(createUser));
+
+    console.log("Users created:");
+    console.log(users);
+    console.log("Finished creating users!");
+  } catch (error) {
+    console.error("Error creating users!");
+    throw error;
+  }
+}
+
+async function createAllEscapeRooms() {
+  try {
+    console.log("Starting to create EscapeRooms...");
+
+    const escapeRoomsToCreate = [
+      {
+        name: "Escape Room 1",
+        description: "TBA",
+      },
+      {
+        name: "Escape Room 2",
+        description: "TBA ",},
+      {
+        name: "Escape Room 3",
+        description: "TBA",
+      },
+      {
+        name: "Escape Room 4",
+        description: "TBA",
+      },
+      {
+        name: "Escape Room 5",
+        description: "TBA ",
+      }
+    
+    ];
+    const EscapeRooms = await Promise.all(
+      escapeRoomsToCreate.map(createEscapeRooms)
+    );
+
+    console.log("EscapeRooms created:");
+    console.log(EscapeRooms);
+
+    console.log("Finished creating EscapeRooms!");
+  } catch (error) {
+    console.error("Error creating EscapeRooms!");
+    throw error;
+  }
+}
+
+
 const syncAndSeed = async()=> {
   await syncTables();
-  const [moe, lucy]  = await Promise.all([
-    createUser({
-      username: 'moe',
-      password: 'moe_password'
-    }),
-    createUser({
-      username: 'lucy',
-      password: 'lucy_password'
-    })
-  ]);
-  console.log('--- seeded users ---');
-  console.log(moe);
-  console.log(lucy);
+  await createInitialUsers();
+  await createAllEscapeRooms();
 };
 
 

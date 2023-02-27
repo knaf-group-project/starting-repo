@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import Home from './Home';
 import Login from './Login';
+import Navbar from './Navbar.js';
 import { Link, Routes, Route } from 'react-router-dom';
 
-
+console.log(Navbar)
 const App = ()=> {
   const [auth, setAuth] = useState({});
   const attemptLogin = ()=> {
@@ -57,6 +58,7 @@ const App = ()=> {
 
   return (
     <div>
+      <Navbar />
       <h1>FS UNI App Template</h1>
       <nav>
         {
@@ -73,6 +75,7 @@ const App = ()=> {
         }
       </nav>
       <Routes>
+      <Route path='/Navbar' element= { <Navbar/> } />
         {
           auth.id ? (
             <>

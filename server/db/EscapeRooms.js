@@ -11,4 +11,5 @@ const createEscapeRooms = async({ name, description }) => {
   }
 
   module.exports = {
-    createEscapeRooms }
+    createEscapeRooms 
+  }
