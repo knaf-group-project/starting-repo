@@ -1,6 +1,6 @@
 const client = require('./client');
 
-const createCart = async({ buyerId }) {
+const createCart = async({ buyerId }) => {
     try {
       const {rows: [cart]} = await client.query(`
         INSERT INTO cart ("buyerId")
