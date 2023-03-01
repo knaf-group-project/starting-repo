@@ -2,8 +2,8 @@ const express = require('express');
 const router = express.Router();
 
 // ROUTER: /api/User
-const usersRouter = require('../db/User');
-router.use('/User', usersRouter);
+const usersRouter = require('./users');
+router.use('/users', usersRouter);
 
 // ROUTER: /api/EscapeRooms
 const EscapeRoomsRouter = require('./EscapeRooms');
