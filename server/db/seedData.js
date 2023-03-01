@@ -1,4 +1,5 @@
 const client = require('./client');
+console.log(client)
 const { createEscapeRooms } = require('./EscapeRooms');
 const { createCart } = require('./cart')
 const { addProductsToCart } = require('./cart_products')
