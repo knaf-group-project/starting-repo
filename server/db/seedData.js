@@ -123,6 +123,5 @@ module.exports = {
   syncAndSeed,
   createUser,
   authenticate,
-  getUserByToken,
-  client
+  getUserByToken
 };

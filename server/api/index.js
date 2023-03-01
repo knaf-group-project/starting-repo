@@ -6,7 +6,7 @@ const usersRouter = require('../db/User');
 router.use('/User', usersRouter);
 
 // ROUTER: /api/EscapeRooms
-const EscapeRoomsRouter = require('../db/EscapeRooms');
+const EscapeRoomsRouter = require('./EscapeRooms');
 router.use('/EscapeRooms', EscapeRoomsRouter);
 
 // ROUTER: /api/cart
