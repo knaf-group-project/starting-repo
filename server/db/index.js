@@ -1,6 +1,7 @@
+const client = require('./client')
+
 module.exports = {
-  // ...require('./client'), 
-  ...require('./client'),
+  client,
   ...require('./User'), 
   ...require('./EscapeRooms'), 
   ...require('./cart'), 
