@@ -3,8 +3,9 @@ import Home from './Home';
 import Login from './Login';
 import Navbar from './Navbar.js';
 import { Link, Routes, Route } from 'react-router-dom';
+import axios from 'axios';
 
-console.log(Navbar)
+
 const App = ()=> {
   const [auth, setAuth] = useState({});
   const attemptLogin = ()=> {
@@ -34,32 +35,25 @@ const App = ()=> {
   }
 
   const login = async({ username, password})=> {
-    fetch(
+    axios.post(
       '/api/auth/',
       {
-        method: 'POST',
-        body: JSON.stringify({ username, password}),
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      }
+      username, password 
+      },
     )
-    .then( response => response.json())
-    .then( (data) => {
-      if(data.token){
-        window.localStorage.setItem('token', data.token);
-        attemptLogin();
-      }
-      else {
-        console.log(data);
-      }
+    .then( response => {
+      console.log(response)
+      console.log('success')
+      const data = response.data;
+      window.localStorage.setItem('token', data.token);
+      attemptLogin();
     });
   };
 
   return (
     <div>
       <Navbar />
-      <h1>FS UNI App Template</h1>
+      <h1>Welcome to our site !</h1>
       <nav>
         {
           auth.id ? (
@@ -75,7 +69,7 @@ const App = ()=> {
         }
       </nav>
       <Routes>
-      <Route path='/Navbar' element= { <Navbar/> } />
+      <Route path='/Navbar' element= { <Navbar  logout={logout}/> } />
         {
           auth.id ? (
             <>
