@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Home from './Home';
 import Login from './Login';
+import EscapeRooms from './EscapeRooms';
 import Navbar from './Navbar.js';
 import { Link, Routes, Route } from 'react-router-dom';
 import axios from 'axios';
@@ -8,6 +9,7 @@ import axios from 'axios';
 
 const App = ()=> {
   const [auth, setAuth] = useState({});
+  const [rooms, setRooms] = useState([]);
   const attemptLogin = ()=> {
     const token = window.localStorage.getItem('token');
     if(token){
@@ -29,6 +31,14 @@ const App = ()=> {
     attemptLogin();
   }, []);
 
+  useEffect(()=> {
+    fetch('./api/EscapeRooms')
+      .then( response => response.json())
+      .then( rooms => {
+        setRooms(rooms)
+      })
+  }, []);
+
   const logout = ()=> {
     window.localStorage.removeItem('token');
     setAuth({});
@@ -39,7 +49,7 @@ const App = ()=> {
       '/api/auth/',
       {
       username, password 
-      },
+      }
     )
     .then( response => {
       console.log(response)
@@ -67,9 +77,11 @@ const App = ()=> {
             </>
           )
         }
+          <Link to='/EscapeRooms'>Escape Rooms({ rooms.length})</Link>
       </nav>
       <Routes>
       <Route path='/Navbar' element= { <Navbar  logout={logout}/> } />
+      <Route path='/EscapeRooms' element= { <EscapeRooms rooms={rooms} /> } />
         {
           auth.id ? (
             <>

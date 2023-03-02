@@ -1,7 +1,9 @@
 const client = require('./client');
-const { createEscapeRooms } = require('./EscapeRooms');
+const { createEscapeRooms, getRooms } = require('./EscapeRooms');
 const { createCart } = require('./cart')
 const { addProductsToCart } = require('./cart_products')
+
+
 
 const {
   getUserByToken,
@@ -30,7 +32,8 @@ const syncTables = async()=> {
     CREATE TABLE EscapeRooms(
       id SERIAL PRIMARY KEY,
       name VARCHAR(255) UNIQUE NOT NULL,
-      description TEXT
+      briefDescription TEXT,
+      mainDescription TEXT
     );
     
     CREATE TABLE cart(
@@ -77,22 +80,28 @@ async function createAllEscapeRooms() {
     const escapeRoomsToCreate = [
       {
         name: "Escape Space",
-        description: "TBA",
+        briefDescription: "brief tba",
+        mainDescription: "main tba",
       },
       {
         name: "Escape Room 2",
-        description: "TBA ",},
+        briefDescription: "brief tba ",
+        mainDescription: "main tba",
+      },
       {
         name: "Escape Room 3",
-        description: "TBA",
+        briefDescription: "brief tba",
+        mainDescription: "main tba",
       },
       {
         name: "Escape Room 4",
-        description: "TBA",
+        briefDescription: "brief tba",
+        mainDescription: "main tba",
       },
       {
         name: "Escape Room 5",
-        description: "TBA ",
+        briefDescription: "brief tba ",
+        mainDescription: "main tba",
       }
     
     ];
