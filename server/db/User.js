@@ -1,6 +1,6 @@
 const client = require('./client');
 const jwt = require('jsonwebtoken');
-const JWT = process.env.JWT;
+const JWT_SECRET = process.env.JWT_SECRET;
 
 
 const createUser = async({ username, password }) => {
@@ -43,7 +43,7 @@ const authenticate = async({ username, password }) => {
     error.status = 401;
     throw error;
   }
-  return jwt.sign({ id: response.rows[0].id }, JWT);
+  return jwt.sign({ id: response.rows[0].id }, JWT_SECRET);
 }
 
 module.exports = {

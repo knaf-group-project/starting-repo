@@ -31,8 +31,8 @@ const Navbar = ({user, logout})=> {
 
         <nav className="navbar">
           <li><Link to='/Home'>Home</Link></li>
-          <li><Link to='/Routines'>About</Link></li>
-          <li><Link to='/Activities'>Escape Rooms</Link></li>
+          <li><Link to='/About'>About</Link></li>
+          <li><Link to='/EscapeRooms'>Escape Rooms</Link></li>
         </nav>
 
         <div className="header-btn">

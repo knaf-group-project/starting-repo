@@ -18,7 +18,7 @@ const App = ()=> {
         {
           method: 'GET',
           headers: {
-            'authorization': token 
+            'authorization':`Bearer${token}`
           }
         }
       )
