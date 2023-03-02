@@ -8,7 +8,7 @@ const EscapeRooms = ({rooms}) => {
 							return(
 								<li key={rooms.id}>
 									{rooms.name}
-									{rooms.briefDescription}
+									{rooms.briefdescription}
 								</li>
 							)
 						})
