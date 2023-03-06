@@ -13,14 +13,14 @@ router.use('/users', usersRouter);
 const EscapeRoomsRouter = require('./EscapeRooms');
 router.use('/EscapeRooms', EscapeRoomsRouter);
 
-// ROUTER: /api/cart
-const cartRouter = require('../db/cart');
-router.use('/cart', cartRouter);
+// // ROUTER: /api/cart
+// const cartRouter = require('../db/cart');
+// router.use('/cart', cartRouter);
 
-// ROUTER: /api/cart_products
-const cartProductsRouter = require('../db/cart_products');
+// // ROUTER: /api/cart_products
+// const cartProductsRouter = require('../db/cart_products');
 
-router.use('/cart_products', cartProductsRouter);
+// router.use('/cart_products', cartProductsRouter);
 
 router.use((error, req, res, next) => {
     if (error.name == "UnauthorizedUserError") {

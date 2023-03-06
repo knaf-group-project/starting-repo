@@ -6,7 +6,8 @@ const { JWT_SECRET } = process.env
 const {
     createUser,
     authenticate,
-    getUserByToken
+    getUserByToken,
+    getUserByUsername
 } = require('../db/User')
 
 router.use(async (req, res, next) => {
@@ -20,7 +21,7 @@ router.use(async (req, res, next) => {
         const { username } = jwt.verify(token, JWT_SECRET);
   
         if (username) {
-          req.user = await getUserByToken({ username });
+          req.user = await getUserByToken({ username }); // fix this getUserByToken function
           next();
         } else {
           res.status(401);
@@ -43,7 +44,7 @@ router.post('/register', async (req, res, next) => {
     const { username, password } = req.body;
 
     try {
-        const user = await getUserByToken(username);
+        const user = await getUserByUsername(username);
 
         if (user) {
             res.send({
@@ -70,7 +71,6 @@ router.post('/register', async (req, res, next) => {
             username
         }, process.env.JWT_SECRET
         );
-
         res.send({
             message: 'Thank you for signing up',
             token: token,

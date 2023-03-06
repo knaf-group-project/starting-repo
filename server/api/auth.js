@@ -58,6 +58,7 @@ router.post('/', async(req, res, next)=> {
 });
 
 router.get('/', async(req, res, next)=> {
+  console.log(req.headers.authorization)
   try {
     res.send(await getUserByToken(req.headers.authorization)); 
   }

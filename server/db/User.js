@@ -64,11 +64,22 @@ async function getUserById(userId) {
   }catch(error){
     throw error;
   }
- }
+}
+
+async function getUserByUsername(userName) {
+  
+  const { rows } = await client.query(`
+  SELECT * FROM users WHERE username = $1`,
+    [userName]
+    );
+    return rows [0]
+  }
+
 module.exports = {
   createUser,
   authenticate,
   getUserByToken,
   getUserById,
+  getUserByUsername,
 };
 

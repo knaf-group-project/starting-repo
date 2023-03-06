@@ -1,21 +1,23 @@
 import React, { useState } from 'react';
 
-
-const Register = ({register}) => {
+const Register = ({ register }) => {
   const [registerUsername, setRegisterUsername] = useState('');
   const [registerPassword, setRegisterPassword] = useState('');
 
   const registerSubmit = async (ev) => {
     ev.preventDefault();
-    try {
-    register({registerUsername, registerPassword})
-    } catch (error) {
-      console.error(error);
-    }
+    await register(registerUsername, registerPassword);
+
+    clearForm();
+  }
+
+  const clearForm = () => {
+    setRegisterUsername('')
+    setRegisterPassword('')
   }
 
   return (
-    <form className="registerSubmit" onSubmit={registerSubmit}>
+    <form className="registerSubmit" onSubmit={register}>
       <h1 className="registerIn">Please register here!</h1>
       <input
         className="registerIn"
@@ -29,7 +31,7 @@ const Register = ({register}) => {
         value={registerPassword}
         onChange={ev => setRegisterPassword(ev.target.value)} />
 
-      <button className="registerIn">Register</button>
+      <button onClick={registerSubmit} className="registerIn">Register</button>
     </form>
   )
 };

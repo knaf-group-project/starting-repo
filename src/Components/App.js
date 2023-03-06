@@ -61,7 +61,7 @@ const App = ()=> {
     });
   };
 
-  const register = async ({ username, password }) => {
+  const register = async ( username, password ) => {
     axios.post(
       '/api/users/register', 
       {
@@ -72,6 +72,7 @@ const App = ()=> {
         console.log('success')
         const data = response.data;
         console.log(data)
+        window.localStorage.setItem('token', data.token);
     });
   };
 
@@ -98,7 +99,7 @@ const App = ()=> {
       <Routes>
       <Route path='/Navbar' element= { <Navbar  logout={logout}/> } />
       <Route path='/EscapeRooms' element= { <EscapeRooms rooms={rooms} /> } />
-      <Route path='/Register' element= { <Register register={register}/> } />
+      <Route path='/Register' element= { <Register setAuth={setAuth} register={register}/> } />
         {
           auth.id ? (
             <>
