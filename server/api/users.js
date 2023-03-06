@@ -10,7 +10,7 @@ const {
 } = require('../db/User')
 
 router.use(async (req, res, next) => {
-    const prefix = `Bearer `;
+    const prefix = 'Bearer';
     const auth = req.header('Authorization');
     if (!auth) {
       next();

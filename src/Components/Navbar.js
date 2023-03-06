@@ -33,6 +33,7 @@ const Navbar = ({user, logout})=> {
           <li><Link to='/Home'>Home</Link></li>
           <li><Link to='/About'>About</Link></li>
           <li><Link to='/EscapeRooms'>Escape Rooms</Link></li>
+          <li><Link to='/Register'>Sign up</Link></li>
         </nav>
 
         <div className="header-btn">
@@ -42,7 +43,6 @@ const Navbar = ({user, logout})=> {
             </div>
           ) : ( */}
             <>
-              <Link to="/Register" className="sign-up">Sign Up</Link>
               <Link to="/login" className="in">Login</Link>
             </>
         </div>

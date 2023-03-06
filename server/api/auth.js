@@ -5,7 +5,8 @@ const { JWT_SECRET } = process.env
 
 const {
   authenticate,
-  getUserByToken
+  getUserByToken,
+  getUserById,
 } = require('../db');
 
 
@@ -18,10 +19,8 @@ router.use(async (req, res, next) => {
     next();
   } else if (auth.startsWith(prefix)) {
     const token = auth.slice(prefix.length);
-    console.log(token)
     
     try {
-      console.log(JWT_SECRET)
       const { id } = jwt.verify(token, JWT_SECRET);
       
       if (id) {
@@ -29,7 +28,7 @@ router.use(async (req, res, next) => {
         next();
       }
     } catch ({ name, message }) {
-      next ({ name, message });
+      next({ name, message });
     }
   } else {
     next ({

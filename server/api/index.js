@@ -5,6 +5,10 @@ const router = express.Router();
 const usersRouter = require('./users');
 router.use('/users', usersRouter);
 
+// ROUTER: /api/Register
+// const registerRouter = require('./users/register');
+// router.use('/users/register', registerRouter);
+
 // ROUTER: /api/EscapeRooms
 const EscapeRoomsRouter = require('./EscapeRooms');
 router.use('/EscapeRooms', EscapeRoomsRouter);
@@ -15,7 +19,7 @@ router.use('/cart', cartRouter);
 
 // ROUTER: /api/cart_products
 const cartProductsRouter = require('../db/cart_products');
-// const { getUserById } = require('../db');
+
 router.use('/cart_products', cartProductsRouter);
 
 router.use((error, req, res, next) => {

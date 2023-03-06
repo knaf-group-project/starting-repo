@@ -1,19 +1,25 @@
 const client = require('./client');
 const jwt = require('jsonwebtoken');
-const JWT_SECRET = process.env.JWT_SECRET;
-
+const { JWT_SECRET } = process.env;
 
 const createUser = async({ username, password }) => {
   const SQL = `
-    INSERT INTO users(username, password)
-    VALUES($1, $2) RETURNING *
+  INSERT INTO users(username, password)
+  VALUES($1, $2) RETURNING *
   `;
   const response = await client.query(SQL, [ username, password ]);
   return response.rows[0];
 }
 
+
 const getUserByToken = async(token) => {
-  const payload = await jwt.verify(token, JWT);
+  console.log( JWT_SECRET )
+  console.log(token)
+  const prefix = "Bearer";
+  if(token.startsWith(prefix)) {
+    token = token.slice(prefix.length);
+  }
+  const payload = await jwt.verify(token, JWT_SECRET);
   const SQL = `
     SELECT users.*
     FROM users
@@ -30,11 +36,12 @@ const getUserByToken = async(token) => {
   return user; 
 }
 
+
 const authenticate = async({ username, password }) => {
   const SQL = `
-    SELECT id
-    FROM users
-    WHERE username = $1 and password = $2
+  SELECT id
+  FROM users
+  WHERE username = $1 and password = $2
   `;
   const response = await client.query(SQL, [ username, password]);
   console.log(response);
@@ -46,9 +53,22 @@ const authenticate = async({ username, password }) => {
   return jwt.sign({ id: response.rows[0].id }, JWT_SECRET);
 }
 
+async function getUserById(userId) {
+  try {
+   const {rows} = await client.query(`
+    SELECT id, username 
+    FROM users
+    WHERE id = $1
+   `,[userId] );
+   return rows[0];
+  }catch(error){
+    throw error;
+  }
+ }
 module.exports = {
   createUser,
   authenticate,
-  getUserByToken
+  getUserByToken,
+  getUserById,
 };
 

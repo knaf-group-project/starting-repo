@@ -5,6 +5,7 @@ import EscapeRooms from './EscapeRooms';
 import Navbar from './Navbar.js';
 import { Link, Routes, Route } from 'react-router-dom';
 import axios from 'axios';
+import Register from './Register';
 
 
 const App = ()=> {
@@ -60,6 +61,21 @@ const App = ()=> {
     });
   };
 
+  const register = async ({ username, password }) => {
+    axios.post(
+      '/api/users/register', 
+      {
+        username, password
+      }
+      )
+      .then( response => {
+        console.log('success')
+        const data = response.data;
+        console.log(data)
+    });
+  };
+
+
   return (
     <div>
       <Navbar />
@@ -82,6 +98,7 @@ const App = ()=> {
       <Routes>
       <Route path='/Navbar' element= { <Navbar  logout={logout}/> } />
       <Route path='/EscapeRooms' element= { <EscapeRooms rooms={rooms} /> } />
+      <Route path='/Register' element= { <Register register={register}/> } />
         {
           auth.id ? (
             <>
