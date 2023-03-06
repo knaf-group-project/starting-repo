@@ -98,6 +98,7 @@ const App = ()=> {
       </nav>
       <Routes>
       <Route path='/Navbar' element= { <Navbar  logout={logout}/> } />
+      
       <Route path='/EscapeRooms' element= { <EscapeRooms rooms={rooms} /> } />
       <Route path='/Register' element= { <Register setAuth={setAuth} register={register}/> } />
         {
