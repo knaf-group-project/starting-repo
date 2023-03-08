@@ -38,14 +38,15 @@ const syncTables = async()=> {
     
     CREATE TABLE cart(
       id SERIAL PRIMARY KEY,
-      “buyerId” INTEGER REFERENCES users(id)
+      “buyerId” INTEGER REFERENCES users(id) NOT NULL,
+      is_active BOOLEAN DEFAULT true
     );
 
       CREATE TABLE cart_products (
         id SERIAL PRIMARY KEY,
+        "cartId" INTEGER REFERENCES cart(id),
         "EscapeRoomsId" INTEGER REFERENCES EscapeRooms(id),
-        "checkoutId" INTEGER REFERENCES cart(id),
-        UNIQUE ("EscapeRoomsId", "checkoutId")
+        UNIQUE ("cartId", "EscapeRoomsId")
       );
   `);
     console.log("Tables created!");

@@ -20,10 +20,20 @@ router.use('/EscapeRooms', EscapeRoomsRouter);
 const cartRouter = require('./cart');
 router.use('/cart', cartRouter);
 
-// // ROUTER: /api/cart_products
-// const cartProductsRouter = require('../db/cart_products');
+//ROUTER: /api/cart/:buyerId
+router.get('/cart/:buyerId', async (req, res, res) => {
+  const { buyerId } = req.params;
+  const cart = await getUserByToken(req.headers.authorization);
+if(!user){
+res.status(401).send({error: 'Unauthorized'});
+return;
+}
+})
 
-// router.use('/cart_products', cartProductsRouter);
+// // ROUTER: /api/cart_products
+const cartProductsRouter = require('./cart_products');
+const { getUserByToken } = require('../db');
+router.use('/cart_products', cartProductsRouter);
 
 router.use((error, req, res, next) => {
     if (error.name == "UnauthorizedUserError") {
