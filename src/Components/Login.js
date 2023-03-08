@@ -7,9 +7,17 @@ const Login = ({ login })=> {
   const _login = (ev)=> {
     ev.preventDefault();
     login({ username, password });
-  };
+
+    clearForm();
+  }
+
+  const clearForm = () => {
+    setUsername('')
+    setPassword('')
+  }
   return (
-    <div>
+
+    <div className='loginForm'>
       <h2>Login</h2>
       <form onSubmit={ _login }>
         <input

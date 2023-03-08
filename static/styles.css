@@ -6,16 +6,10 @@
   text-decoration: none;
   list-style: none;
 }
+
 html{
-  width: 100%;
-  height: 100vh;
   background-color:	#C0C0C0;
-  background-size: cover;
-  background-position: center;
- 
-}
-body{
-  margin-top: 6rem;
+  height: 100%;
 }
 
 /*========== Header ==========*/
@@ -23,8 +17,9 @@ header{
   position: fixed;
   width: 100%;
   top: 0;
+  left: 0;
   right: 0;
-  z-index: 1000;
+  z-index: 999;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -119,18 +114,273 @@ header{
 }
 }
 
-/*========== form ==========*/
-form {
-  display: flex;
-  flex-direction:column;
-  justify-content: center;
-}
-
-form > * {
-  margin: 1rem;
-}
-
-nav {
+nav{
   display: flex;
   justify-content: space-around;
 }
+/*========== FOOTER ==========*/
+footer{
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  background: linear-gradient(to right, #00093c, #2d0b00);
+  color: #fff;
+  padding: 60px 0 30px;
+  border-top-left-radius: 125px;
+  font-size: 13px;
+  line-height: 20px;
+}
+.row{
+  width: 85%;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+.col{
+  flex-basis: 25%;
+  padding: 10px;
+}
+
+.logo2{
+  width: 80px;
+  margin-bottom: 30px;
+}
+.col h3{
+  width: fit-content;
+  margin-bottom: 40px;
+  position: relative;
+}
+.email-id{
+  width: fit-content;
+  border-bottom: 1px solid #ccc;
+  margin: 20px 0;
+}
+ul li{
+  list-style: none;
+  margin-bottom: 12px;
+}
+ul li a {
+  text-decoration: none;
+  color: #fff;
+}
+.footer-form{
+  padding-bottom: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 50px;
+}
+.footer-form .bx-envelope{
+  font-size: 20px;
+  margin-right: 10px;
+}
+.footer-form input {
+  width: 100%;
+  background: transparent;
+  color: #ccc;
+  border: 0;
+  outline: none;
+}
+.footer-form button{
+  background: transparent;
+  border: 0;
+  outline: none;
+  cursor: pointer;
+}
+.footer-form button .bx-right-arrow-alt{
+  font-size: 20px;
+  color: #ccc;
+}
+.social-icons .bx{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 40px;
+  font-size: 20px;
+  color: #000;
+  background: #fff;
+  margin-right: 15px;
+  cursor: pointer;
+}
+hr{
+  width: 90%;
+  border: 0;
+  border-bottom: 1px solid #ccc;
+  margin: 20px auto;
+}
+.copyright{
+  text-align: center;
+}
+.underline{
+  width: 100%;
+  height: 5px;
+  background: #767676;
+  border-radius: 3px;
+  position: absolute;
+  top: 25px;
+  left: 0;
+  overflow: hidden;
+}
+.underline span{
+  width: 15px;
+  height: 100%;
+  background: #fff;
+  border-radius: 3px;
+  position: absolute;
+  top: 0;
+  left: 10px;
+  animation: moving 2s linear infinite;
+}
+@keyframes moving{
+  0%{
+    left: -20px;
+  }
+  100%{
+    left: 100%;
+  }
+}
+
+/* ========== Media Queries ========== */
+
+@media (max-width: 700px){
+  footer{
+    bottom: unset;
+  }
+  .col {
+    flex-basis: 100%;
+  }
+  .col:nth-child(2), .col:nth-child(3){
+    flex-basis: 100%;
+  }
+}
+
+
+ /*========== Sign Up ==========*/
+.formBody{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: static;
+  min-height: 70%;
+
+}
+
+.containerSignUp{
+  margin: 0 auto;
+  position: fixed;
+  padding: 40px;
+  border-radius: 20px;
+  border: 8px solid #C0C0C0;
+  overflow: auto;
+  box-shadow: -5px -5px 15px rgba(255,255,255,0.1),
+  5px 5px 15px rgba(0,0,0,0.35),
+  inset -5px -5px 15px rgba(255,255,255,0.1),
+ inset 5px 5px 15px rgba(0,0,0,0.35);
+}
+
+.containerSignUp .registerSubmit{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 25px;
+}
+.containerSignUp .registerSubmit  h2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+}
+.containerSignUp .registerSubmit .inputBox  {
+  position: relative;
+  width: 300px;
+}
+.containerSignUp .registerSubmit .inputBox input{
+  padding: 12px 10px 12px 48px;
+  border: none;
+  width: 100%;
+  background: #C0C0C0;
+  border: 1px solid rgba(0,0,0,0.1);
+  color: #fff;
+  font-weight: 300;
+  border-radius: 25px;
+  font-size: 1em;
+  box-shadow: -5px -5px 15px rgba(255,255,255,0.1),
+  5px 5px 15px rgba(0,0,0,0.35);
+  transition: 0.5s;
+  outline: none;
+}
+.containerSignUp .registerSubmit .inputBox span {
+  position: absolute;
+  left: 0;
+  padding: 12px 10px 12px 48px;
+  pointer-events: none;
+  font-size: 1em;
+  font-weight: 300;
+  transition: 0.5s;
+  letter-spacing: 0.05em;
+  color: rgba(255,255,255,0.5);
+}
+.containerSignUp .registerSubmit .inputBox input:valid ~ span,
+.containerSignUp .registerSubmit .inputBox input:focus ~ span{
+  color: #ff9514;
+  border: 1px solid #ff9514;
+  background: #C0C0C0;
+  transform: translateX(25px) translateY(-7px);
+  font-size: 0.6rem;
+  padding: 0 8px;
+  border-radius: 10px;
+  letter-spacing: 0.1em;
+}
+.containerSignUp .registerSubmit .inputBox input:valid,
+.containerSignUp .registerSubmit .inputBox input:focus{
+border: 1px solid #ff9514;
+}
+.containerSignUp .registerSubmit .inputBox i {
+  position: absolute;
+  top: 15px;
+  left: 16px;
+  width: 25px;
+  padding: 2px 0;
+  padding-right: 8px;
+  color: #ff9514;
+  border-right: 1px solid #ff9514;
+}
+.containerSignUp .registerSubmit .inputBox input[type="submit"]{
+  background-color: #ff9514;
+  color: #223243;
+  padding: 10px 0;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: -5px -5px 15px rgba(255,255,255,0.1),
+  5px 5px 15px rgba(0,0,0,0.35),
+  inset -5px -5px 15px rgba(255,255,255,0.1),
+ inset 5px 5px 15px rgba(0,0,0,0.35);
+}
+.containerSignUp .registerSubmit p {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.75em;
+  font-weight: 300;
+}
+
+.containerSignUp .registerSubmit p a {
+font-weight: 500;
+color: #fff;
+}
+ /*========== Login Form ==========*/
+ .loginForm {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  position: static;
+  min-height: 50%;
+ }

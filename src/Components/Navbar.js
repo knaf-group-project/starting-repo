@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-
-const Navbar = ({user, logout})=> {
+const Navbar = ({ auth, logout }) => {
   useEffect(() => {
     const menu = document.querySelector('#menu-icon');
     const navbar = document.querySelector('.navbar');
@@ -20,8 +19,8 @@ const Navbar = ({user, logout})=> {
       });
     });
   }, []);
+
   return (
-    <section>
       <header className="header">
         <a href="#" className="logo">
           Escape Room
@@ -30,24 +29,25 @@ const Navbar = ({user, logout})=> {
         <div className="bx bx-menu" id="menu-icon"></div>
 
         <nav className="navbar">
-          <li><Link to='/Home'>Home</Link></li>
+          <li><Link to='/'>Home</Link></li>
           <li><Link to='/About'>About</Link></li>
           <li><Link to='/EscapeRooms'>Escape Rooms</Link></li>
           <li><Link to='/Register'>Sign up</Link></li>
         </nav>
 
         <div className="header-btn">
-          {/* {user.id ? (
+          {auth.id ? (
             <div className='welcome'>
-              Welcome {user.username} <button onClick={logout}>Logout</button>
+              Hello {auth.username}
+              <button onClick={ logout }> Logout </button>
             </div>
-          ) : ( */}
+          ) : (
             <>
               <Link to="/login" className="in">Login</Link>
             </>
+          )}
         </div>
       </header>
-    </section>
   );
 };
 
