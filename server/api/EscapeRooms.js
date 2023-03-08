@@ -12,8 +12,11 @@ EscapeRoomsRouter.get('/', async (req, res, next) => {
         next(error);
     }
 })
-EscapeRoomsRouter.post('/:roomId', async (req, res, next) => {
-    const id = useParams().id
+
+// ** work on this to get all escape rooms 
+
+// EscapeRoomsRouter.post('/:roomId', async (req, res, next) => {
+//     const id = useParams().id
     
-} )
+// } )
 module.exports = EscapeRoomsRouter;

@@ -16,9 +16,9 @@ router.use('/users', usersRouter);
 const EscapeRoomsRouter = require('./EscapeRooms');
 router.use('/EscapeRooms', EscapeRoomsRouter);
 
-// // ROUTER: /api/cart
-// const cartRouter = require('../db/cart');
-// router.use('/cart', cartRouter);
+//ROUTER: /api/cart
+const cartRouter = require('./cart');
+router.use('/cart', cartRouter);
 
 // // ROUTER: /api/cart_products
 // const cartProductsRouter = require('../db/cart_products');

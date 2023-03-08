@@ -15,5 +15,15 @@ const createCart = async({ buyerId }) => {
      }
   }
 
+  const getCart = async() => {
+    const SQL = `
+      SELECT * 
+      FROM cart
+    `;
+    const response = await client.query(SQL);
+    return response.rows; 
+  }
+
   module.exports = {
+    getCart,
     createCart }
