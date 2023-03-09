@@ -72,6 +72,14 @@ async function createInitialUsers() {
   
 }
 
+const createUserCart = async () => {
+  try {const userCart = await Promise.all (
+    userId ? createCart : null
+  )
+} catch (error ) {
+throw error}
+}
+
 async function createAllEscapeRooms() {
   try {
     console.log("Starting to create EscapeRooms...");
@@ -123,6 +131,7 @@ const syncAndSeed = async()=> {
   await syncTables();
   await createInitialUsers();
   await createAllEscapeRooms();
+  await createUserCart();
 };
 
 
