@@ -47,7 +47,7 @@ const addEscapeRoomToCart = async ({ cartId, EscapeRoomsId})=>{
 // if(checkResponse.rows.length){
 //   await client.query(
 //     `UPDATE cart_products WHERE cartId = $1 AND EscapeRoomsId = $2`
-//   )
+//   )`
 // }
 
   const SQL = 
