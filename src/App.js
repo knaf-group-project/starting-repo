@@ -11,9 +11,15 @@ import {
 import Footer from './Components/Footer';
 
 
+
 const App = () => {
   const [auth, setAuth] = useState({});
+  const [cart , setCart] = useState({});
   const [rooms, setRooms] = useState([]);
+
+  console.log('Escape Rooms:', rooms)
+  console.log('CART:', cart)
+  
   const attemptLogin = () => {
     const token = window.localStorage.getItem('token');
     if (token) {
@@ -26,22 +32,27 @@ const App = () => {
           }
         }
       )
-        .then(response => response.json())
-        .then(user => setAuth(user));
-    }
-  };
+      .then(response => response.json())
+      .then(user => {
+        setAuth(user);
+        fetch(`./api/cart/${user.id}`)
+          .then(response => response.json())
+          .then(cart => setCart(cart));
+      });
+  }
+};
+
+const fetchEscapeRooms = async () => {
+  const response = await fetch('./api/EscapeRooms');
+  const rooms = await response.json();
+  setRooms(rooms)
+}
 
   useEffect(() => {
     attemptLogin();
+    fetchEscapeRooms()
   }, []);
 
-  useEffect(() => {
-    fetch('./api/EscapeRooms')
-      .then(response => response.json())
-      .then(rooms => {
-        setRooms(rooms)
-      })
-  }, []);
 
   const logout = () => {
     window.localStorage.removeItem('token');
@@ -86,7 +97,7 @@ const App = () => {
       <NavBar auth={auth} logout={logout} />
       <Routes>
         <Route path='/' element={<Home />} />
-        <Route path='/EscapeRooms' element={<EscapeRooms rooms={rooms} />} />
+        <Route path='/EscapeRooms' element={<EscapeRooms rooms={rooms} cart={cart} />} />
         <Route path='/Register' element={<Register setAuth={setAuth} register={register} />} />
         <Route path='/login' element={<Login login={login} />} />
       </Routes>

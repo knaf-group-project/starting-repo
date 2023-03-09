@@ -2,9 +2,6 @@ const client = require('./client');
 const { createEscapeRooms, getRooms } = require('./EscapeRooms');
 const { createCart } = require('./cart')
 const { addProductsToCart } = require('./cart_products')
-
-
-
 const {
   getUserByToken,
   createUser,
@@ -72,6 +69,7 @@ async function createInitialUsers() {
     console.error("Error creating users!");
     throw error;
   }
+  
 }
 
 async function createAllEscapeRooms() {
