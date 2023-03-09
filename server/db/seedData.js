@@ -2,6 +2,7 @@ const client = require('./client');
 const { createEscapeRooms, getRooms } = require('./EscapeRooms');
 const { createCart } = require('./cart')
 const { addProductsToCart } = require('./cart_products')
+const {getUserByUsername} = require('../db/User')
 const {
   getUserByToken,
   createUser,
@@ -60,25 +61,45 @@ async function createInitialUsers() {
       {  username: 'moe',  password: 'moe_password'},
       { username: 'lucy',  password: 'lucy_password' },
     ];
-    const users = await Promise.all(usersToCreate.map(createUser));
+    const users = [];
+    for (let user of usersToCreate) {
+      const existingUser = await getUserByUsername(user.username);
+      if (!existingUser) {
+        const createdUser = await createUser(user);
+        users.push(createdUser);
+      } else {
+        console.log(`User with username ${user.username} already exists.`);
+        users.push(existingUser);
+      }
+    }
 
     console.log("Users created:");
     console.log(users);
     console.log("Finished creating users!");
+    
+    return users;
   } catch (error) {
     console.error("Error creating users!");
     throw error;
   }
-  
 }
 
-const createUserCart = async () => {
-  try {const userCart = await Promise.all (
-    userId ? createCart : null
-  )
-} catch (error ) {
-throw error}
-}
+// `async function createUserCart (){
+//   console.log("Starting to create users cart...");
+//   try{
+//     const users = await createInitialUsers();
+//     const carts = await Promise.all(users.map(user => createCart(user.id)));
+    
+//     console.log("Carts created:");
+//     console.log(carts);
+//     console.log("Finished creating carts!");
+//   } catch (error) {
+//     console.error("Error creating carts!");
+//     throw error;
+//   }
+// }`
+
+
 
 async function createAllEscapeRooms() {
   try {
@@ -131,7 +152,7 @@ const syncAndSeed = async()=> {
   await syncTables();
   await createInitialUsers();
   await createAllEscapeRooms();
-  await createUserCart();
+  // await createUserCart();
 };
 
 
