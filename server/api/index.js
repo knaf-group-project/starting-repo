@@ -25,6 +25,7 @@ router.use('/cart', cartRouter);
 //ROUTER: /api/cart/:buyerId
 router.get('/cart/:buyerId', async (req, res, next) => {
   const { buyerId } = req.params;
+  console.log("id:" , buyerId)
   const cart = await getCartByBuyerId({ buyerId });
   res.send(cart)
 });

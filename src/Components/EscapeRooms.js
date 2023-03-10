@@ -1,11 +1,11 @@
 import React from 'react'
 
 
-const EscapeRooms = ({ rooms , cart}) => {
+const EscapeRooms = ({ rooms , cart, setCart}) => {
     const addEscapeRoomsToCart = async (EscapeRoomsId) => {
         const token = window.localStorage.getItem('token');
         if(!token) return;
-        const response = await fetch(`/cart/${EscapeRoomsId}`, {
+        const response = await fetch(`api/cart/${EscapeRoomsId}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -13,13 +13,13 @@ const EscapeRooms = ({ rooms , cart}) => {
             },
         });
         const updatedCart = await response.json();
-        return updatedCart;
+         setCart(updatedCart);
     }
     return (
         <div className='roomForm'>
 
             <ul>
-                <div>Cart ({cart.length})</div>
+                <div>Cart ({cart.EscapeRooms.length})</div>
                 {
                     rooms.map(rooms => {
                         return (
@@ -28,8 +28,8 @@ const EscapeRooms = ({ rooms , cart}) => {
                                 {rooms.briefdescription}
                                 <button
                                     onClick={async () => {
-                                        const updatedCart = await addEscapeRoomsToCart(rooms.id);
-                                        // setCart(updatedCart)
+                                     await addEscapeRoomsToCart(rooms.id);
+
                                     }}
                                 >
                                     Add to Cart

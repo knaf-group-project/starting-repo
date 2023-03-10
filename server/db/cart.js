@@ -3,7 +3,7 @@ const client = require('./client');
 const createCart = async({ buyerId }) => {
   try {
     const {rows: [cart]} = await client.query(`
-    INSERT INTO cart (buyerId)
+    INSERT INTO cart ("buyerId")
     VALUES($1)
     RETURNING *;
     `, [buyerId]);
@@ -27,8 +27,8 @@ const getCartByBuyerId = async ({ buyerId }) => {
     //get products, and attach to cart
     const productsSQL = `
     SELECT * FROM cart_products
-    LEFT JOIN EscapeRooms ON cart_products.EscapeRoomsId = EscapeRooms.id
-    WHERE cart_products.cartId = $1
+    LEFT JOIN EscapeRooms ON cart_products."EscapeRoomsId" = EscapeRooms.id
+    WHERE cart_products."cartId" = $1
     `;
     const EscapeRoomsResponse = await client.query(productsSQL, [cart.id]);
     console.log('CART PRODUCTS:', EscapeRoomsResponse.rows)

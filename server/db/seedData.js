@@ -2,12 +2,12 @@ const client = require('./client');
 const { createEscapeRooms, getRooms } = require('./EscapeRooms');
 const { createCart } = require('./cart')
 const { addProductsToCart } = require('./cart_products')
-const {getUserByUsername} = require('../db/User')
 const {
   getUserByToken,
   createUser,
   authenticate
 } = require('./User');
+const { UNSAFE_DataRouterStateContext } = require('react-router-dom');
 
 
 const syncTables = async()=> {
@@ -36,7 +36,7 @@ const syncTables = async()=> {
     
     CREATE TABLE cart(
       id SERIAL PRIMARY KEY,
-      “buyerId” INTEGER REFERENCES users(id) NOT NULL,
+      "buyerId" INTEGER REFERENCES users(id) NOT NULL,
       is_active BOOLEAN DEFAULT true
     );
 
@@ -61,43 +61,32 @@ async function createInitialUsers() {
       {  username: 'moe',  password: 'moe_password'},
       { username: 'lucy',  password: 'lucy_password' },
     ];
-    const users = [];
-    for (let user of usersToCreate) {
-      const existingUser = await getUserByUsername(user.username);
-      if (!existingUser) {
-        const createdUser = await createUser(user);
-        users.push(createdUser);
-      } else {
-        console.log(`User with username ${user.username} already exists.`);
-        users.push(existingUser);
-      }
-    }
+    const users = await Promise.all(usersToCreate.map(createUser));
 
     console.log("Users created:");
     console.log(users);
     console.log("Finished creating users!");
-    
     return users;
   } catch (error) {
     console.error("Error creating users!");
     throw error;
   }
+  
 }
 
-// `async function createUserCart (){
-//   console.log("Starting to create users cart...");
-//   try{
-//     const users = await createInitialUsers();
-//     const carts = await Promise.all(users.map(user => createCart(user.id)));
+async function createUserCart (users){
+  console.log("Starting to create users cart...");
+  try{
+    const carts = await Promise.all(users.map(user => createCart({ buyerId: user.id })));
     
-//     console.log("Carts created:");
-//     console.log(carts);
-//     console.log("Finished creating carts!");
-//   } catch (error) {
-//     console.error("Error creating carts!");
-//     throw error;
-//   }
-// }`
+    console.log("Carts created:");
+    console.log(carts);
+    console.log("Finished creating carts!");
+  } catch (error) {
+    console.error("Error creating carts!");
+    throw error;
+  }
+}
 
 
 
@@ -150,9 +139,9 @@ async function createAllEscapeRooms() {
 
 const syncAndSeed = async()=> {
   await syncTables();
-  await createInitialUsers();
+  const users = await createInitialUsers();
   await createAllEscapeRooms();
-  // await createUserCart();
+  await createUserCart(users);
 };
 
 

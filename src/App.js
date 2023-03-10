@@ -14,7 +14,7 @@ import Footer from './Components/Footer';
 
 const App = () => {
   const [auth, setAuth] = useState({});
-  const [cart , setCart] = useState({});
+  const [cart , setCart] = useState({EscapeRooms: []});
   const [rooms, setRooms] = useState([]);
 
   console.log('Escape Rooms:', rooms)
@@ -35,7 +35,7 @@ const App = () => {
       .then(response => response.json())
       .then(user => {
         setAuth(user);
-        fetch(`./api/cart/${user.id}`)
+        fetch(`/api/cart/${user.id}`)
           .then(response => response.json())
           .then(cart => setCart(cart));
           console.log(user.id)
@@ -44,7 +44,7 @@ const App = () => {
 };
 
 const fetchEscapeRooms = async () => {
-  const response = await fetch('./api/EscapeRooms');
+  const response = await fetch('/api/EscapeRooms');
   const rooms = await response.json();
   setRooms(rooms)
 }
@@ -98,7 +98,7 @@ const fetchEscapeRooms = async () => {
       <NavBar auth={auth} logout={logout} />
       <Routes>
         <Route path='/' element={<Home />} />
-        <Route path='/EscapeRooms' element={<EscapeRooms rooms={rooms} cart={cart} />} />
+        <Route path='/EscapeRooms' element={<EscapeRooms setCart={setCart} rooms={rooms} cart={cart} />} />
         <Route path='/Register' element={<Register setAuth={setAuth} register={register} />} />
         <Route path='/login' element={<Login login={login} />} />
       </Routes>
