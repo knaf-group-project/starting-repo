@@ -12,10 +12,15 @@ cartRouter.get('/', async (req, res, next) => {
 
 //ROUTER: /api/cart/:buyerId
 cartRouter.get('/:buyerId', async (req, res, next) => {
+  try {
     const { buyerId } = req.params;
     console.log("id:", buyerId)
     const cart = await getCartByBuyerId({ buyerId });
     res.send(cart)
+  }
+  catch(ex){
+    next(ex);
+  }
 });
 
 cartRouter.post('/:EscapeRoomsId', async (req, res) => {
