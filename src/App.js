@@ -5,6 +5,7 @@ import {
   Home,
   Login,
   EscapeRooms,
+  EscapeRoom,
   NavBar,
   Register
 } from './Components'
@@ -98,7 +99,7 @@ const fetchEscapeRooms = async () => {
       <NavBar auth={auth} logout={logout} />
       <Routes>
         <Route path='/' element={<Home />} />
-        <Route path='/EscapeRooms/:id' element={<EscapeRooms setCart={setCart} rooms={rooms} cart={cart} />} />
+        <Route path='/EscapeRooms/:id' element={<EscapeRoom setCart={setCart} rooms={rooms} cart={cart} />} />
         <Route path='/EscapeRooms' element={<EscapeRooms setCart={setCart} rooms={rooms} cart={cart} />} />
         <Route path='/Register' element={<Register setAuth={setAuth} register={register} />} />
         <Route path='/login' element={<Login login={login} />} />
