@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 
 
-const EscapeRooms = ({ rooms , cart, setCart}) => {
+const EscapeRooms = ({ rooms , cart, setCart, auth}) => {
     const addEscapeRoomsToCart = async (EscapeRoomsId) => {
         const token = window.localStorage.getItem('token');
         if(!token) return;
@@ -28,6 +28,7 @@ const EscapeRooms = ({ rooms , cart, setCart}) => {
                                 <p><Link to ={`/EscapeRooms/${room.id}`}>{room.name}</Link></p>
                                 <p>{room.briefdescription}</p>
                                 <button
+                                    disabled={ !auth.id }
                                     onClick={async () => {
                                      await addEscapeRoomsToCart(room.id);
 

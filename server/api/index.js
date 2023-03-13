@@ -58,7 +58,7 @@ router.use((error, req, res, next) => {
   if (error.name == "UnauthorizedUserError") {
     res.status(403);
   }
-  res.send({
+  res.status(500).send({
     name: error.name,
     message: error.message
   });

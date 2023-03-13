@@ -1,27 +1,13 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const Register = ({ setAuth }) => {
+const Register = ({ register }) => {
   const [registerUsername, setRegisterUsername] = useState('');
   const [registerPassword, setRegisterPassword] = useState('');
 
   const registerSubmit = async (ev) => {
     ev.preventDefault();
-    axios
-      .post('/api/users/register', {
-        username: registerUsername,
-        password: registerPassword,
-      })
-      .then((response) => {
-        console.log('success');
-        const data = response.data;
-        console.log(data);
-        window.localStorage.setItem('token', data.token);
-        setAuth({ id: data.id, username: data.username });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    register(registerUsername, registerPassword)
   };
 
   return (

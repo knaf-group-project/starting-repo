@@ -17,11 +17,18 @@ const createCart = async({ buyerId }) => {
 
 ///ID might cause error 
 const getCartByBuyerId = async ({ buyerId }) => {
-    const SQL = `
+    let SQL = `
       SELECT * FROM cart
       WHERE "buyerId" = $1
     `;
-    const response = await client.query(SQL, [buyerId]);
+    let response = await client.query(SQL, [buyerId]);
+    if(response.rows.length === 0){
+      SQL = `
+        INSERT INTO CART("buyerId")
+        VALUES($1) RETURNING *;
+      `;
+      response = await client.query(SQL, [buyerId]);
+    }
     const cart = response.rows[0];
     console.log('THE CART:', cart )
     //get products, and attach to cart
