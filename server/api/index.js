@@ -18,6 +18,13 @@ router.use('/users', usersRouter);
 const EscapeRoomsRouter = require('./EscapeRooms');
 router.use('/EscapeRooms', EscapeRoomsRouter);
 
+// Router: /api/EscapeRooms/:id
+router.get('/EscapeRooms/:id', async (req, res, next) => {
+  const { id } = req.params;
+  const escapeRoom = await getEscapeRoomsById({ id });
+  res.send(escapeRoom)
+});
+
 //ROUTER: /api/cart
 const cartRouter = require('./cart');
 router.use('/cart', cartRouter);

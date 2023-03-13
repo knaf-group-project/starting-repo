@@ -7,8 +7,6 @@ const {
   createUser,
   authenticate
 } = require('./User');
-const { UNSAFE_DataRouterStateContext } = require('react-router-dom');
-
 
 const syncTables = async()=> {
   try{

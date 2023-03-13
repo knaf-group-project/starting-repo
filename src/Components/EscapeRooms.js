@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 
 
 const EscapeRooms = ({ rooms , cart, setCart}) => {
@@ -21,20 +22,20 @@ const EscapeRooms = ({ rooms , cart, setCart}) => {
             <ul>
                 <div>Cart ({cart.EscapeRooms.length})</div>
                 {
-                    rooms.map(rooms => {
+                    rooms.map(room => {
                         return (
-                            <li key={rooms.id}>
-                                {rooms.name}
-                                {rooms.briefdescription}
+                            <div key={room.id}>
+                                <p><Link to ={`/EscapeRooms/${room.id}`}>{room.name}</Link></p>
+                                <p>{room.briefdescription}</p>
                                 <button
                                     onClick={async () => {
-                                     await addEscapeRoomsToCart(rooms.id);
+                                     await addEscapeRoomsToCart(room.id);
 
                                     }}
                                 >
                                     Add to Cart
                                 </button>
-                            </li>
+                            </div>
                         )
                     })
                 }
