@@ -16,23 +16,38 @@ const Login = ({ login })=> {
     setPassword('')
   }
   return (
-
-    <div className='loginForm'>
-      <h2>Login</h2>
-      <form onSubmit={ _login }>
-        <input
-          placeholder='username'
-          value = { username }
-          onChange = { ev => setUsername(ev.target.value) }
+<div className='formBody'>
+  <div className='containerSignUp'>
+      <form className='registerSubmit' onSubmit={_login}>
+        <h2>Login</h2>
+        <div className='inputBox' >
+          <input
+            type='text'
+            required='required'
+            value={username}
+            onChange={(ev) => setUsername(ev.target.value)}
           />
-        <input
-          placeholder='password'
-          value={ password }
-          onChange = { ev => setPassword(ev.target.value) }
-        />
-        <button>Login</button>
+          <i className='bx bx-user' ></i>
+          <span>username</span>
+        </div>
+        <div className='inputBox'>
+          <input
+            type='password'
+            required='required'
+            value={password}
+            onChange={(ev) => setPassword(ev.target.value)}
+          />
+          <i className='bx bxs-lock-alt' ></i>
+          <span>password</span>
+        </div>
+        <div className='inputBox'>
+        <input type='submit' value="Log in">
+              </input>
+        </div>
+        <p>Not a member? <a href="#/Register" className='login'>Sign up now</a></p>
       </form>
     </div>
+  </div>
   );
 };
 
