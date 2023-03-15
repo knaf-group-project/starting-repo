@@ -141,7 +141,7 @@ const fetchEscapeRooms = async () => {
         />
         <Route path='/Register' element={<Register setAuth={setAuth} register={register} />} />
         <Route path='/login' element={<Login login={login} />} />
-        <Route path='/Cart' element={<Cart cart={cart} />} />
+        <Route path='/Cart' element={<Cart cart={cart} setCart={setCart} />} />
 
         </Routes>
         <Footer/>

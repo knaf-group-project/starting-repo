@@ -1,6 +1,36 @@
 import React from "react";
 
-const Cart = ({ cart }) => {
+const Cart = ({ cart, setCart }) => {
+
+    const deleteRoomFromCart = async (EscapeRoomsId) => {
+        const token = window.localStorage.getItem('token');
+        if (!token) return;
+        const response = await fetch(`/api/carts/${EscapeRoomsId}`, {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: token,
+          },
+        });
+        const updatedCart = await response.json();
+        setCart(updatedCart);
+        return updatedCart;
+      };
+    
+      const purchaseCart = async () => {
+        const token = window.localStorage.getItem('token');
+        if (!token) return;
+        const response = await fetch(`/api/carts`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: token,
+          },
+        });
+        const newCart = await response.json();
+        setCart(newCart);
+      };
+
     console.log('cart:', cart);
     return (
     <div>
@@ -8,15 +38,27 @@ const Cart = ({ cart }) => {
         <ul>
         {cart.EscapeRooms?.map((room) => {
           return (
-            <li key ={room.id}>
-              {room.name}
-              
-            </li>
-          );
-        })}
-        </ul>
-      
-    </div>
-  );
+            <li key={room.id}>
+            {room.name}
+            <button
+              onClick={async () => {
+                const updatedCart = await deleteRoomFromCart(room.id);
+              }}
+            >
+              Remove Room
+            </button>
+          </li>
+        );
+      })}
+    </ul>
+    <button
+      onClick={async () => {
+        const newCart = await purchaseCart();
+      }}
+    >
+      PURCHASE CART
+    </button>
+  </div>
+);
 };
  export default Cart
