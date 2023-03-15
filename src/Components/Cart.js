@@ -5,7 +5,7 @@ const Cart = ({ cart, setCart }) => {
     const deleteRoomFromCart = async (EscapeRoomsId) => {
         const token = window.localStorage.getItem('token');
         if (!token) return;
-        const response = await fetch(`/api/carts/${EscapeRoomsId}`, {
+        const response = await fetch(`/api/cart/${EscapeRoomsId}`, {
           method: 'DELETE',
           headers: {
             'Content-Type': 'application/json',
@@ -20,7 +20,7 @@ const Cart = ({ cart, setCart }) => {
       const purchaseCart = async () => {
         const token = window.localStorage.getItem('token');
         if (!token) return;
-        const response = await fetch(`/api/carts`, {
+        const response = await fetch(`/api/cart`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

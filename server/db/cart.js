@@ -52,10 +52,21 @@ const getCart = async() => {
     return response.rows; 
   }
 
-
+// purchase cart
+const purchaseCart = async ({ cartId, buyerId }) => {
+  const SQL = `
+  UPDATE carts
+  SET is_active = false
+  WHERE id = $1
+  `;
+  await client.query(SQL, [cartId]);
+  const newCart = await createCart({ buyerId });
+  return newCart;
+};
 
   module.exports = {
     getCart,
     createCart ,
-    getCartByBuyerId
+    getCartByBuyerId,
+    purchaseCart
   }

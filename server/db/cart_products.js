@@ -18,6 +18,17 @@ async function addProductsToCart({ cartId, EscapeRoomsId}) {
     }
   }
 
+  // delete room from cart
+  const deleteRoomFromCart = async ({ cartId, EscapeRoomsId }) => {
+    const SQL = `
+      DELETE FROM cart_products
+      WHERE "cartId" = $1 AND "EscapeRoomsId" = $2
+    `;
+    await client.query(SQL, [EscapeRoomsId, cartId]);
+    return;
+  };
+
   module.exports = {
-    addProductsToCart
+    addProductsToCart,
+    deleteRoomFromCart
   }

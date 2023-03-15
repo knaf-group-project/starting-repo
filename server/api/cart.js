@@ -44,7 +44,7 @@ cartRouter.delete('/:EscapeRoomsId', async (req, res) => {
     return;
   }
   const cart = await getCartByBuyerId({ buyerId: user.id });
-  await deleteProductFromCart({ cartId: cart.id, EscapeRoomsId });
+  await deleteRoomFromCart({ cartId: cart.id, EscapeRoomsId });
   const updatedCart = await getCartByBuyerId({ buyerId: user.id });
   res.send(updatedCart);
 });
