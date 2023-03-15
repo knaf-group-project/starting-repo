@@ -29,31 +29,6 @@ router.get('/EscapeRooms/:id', async (req, res, next) => {
 const cartRouter = require('./cart');
 router.use('/cart', cartRouter);
 
-//ROUTER: /api/cart/:buyerId
-router.get('/cart/:buyerId', async (req, res, next) => {
-  const { buyerId } = req.params;
-  console.log("id:" , buyerId)
-  const cart = await getCartByBuyerId({ buyerId });
-  res.send(cart)
-});
-
-router.post('/cart/:EscapeRoomsId', async (req, res) => {
-  const {EscapeRoomsId } = req.params;
-  const user = await getUserByToken(req.headers.authorization);
-  if(!user){
-    res.status(401).send({ error: 'Unauthorized' });
-    return;
-  } 
-  const cart = await getCartByBuyerId({usersId: user.id});
-  await addEscapeRoomToCart({cartId: cart.id, EscapeRoomsId});
-  const updatedCart = await getCartByBuyerId({usersId: user.id});
-  res.send(updatedCart)  
-});
-
-// ROUTER: /api/cart_products
-// const cartProductsRouter = require('./cart_products');
-// router.use('/cart_products', cartProductsRouter);
-
 router.use((error, req, res, next) => {
   if (error.name == "UnauthorizedUserError") {
     res.status(403);

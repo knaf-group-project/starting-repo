@@ -36,4 +36,17 @@ cartRouter.post('/:EscapeRoomsId', async (req, res) => {
     res.send(updatedCart)
 });
 
+cartRouter.delete('/:EscapeRoomsId', async (req, res) => {
+  const { EscapeRoomsId } = req.params;
+  const user = await getUserByToken(req.headers.authorization);
+  if (!user) {
+    res.status(401).send({ error: 'Unauthorized' });
+    return;
+  }
+  const cart = await getCartByBuyerId({ buyerId: user.id });
+  await deleteProductFromCart({ cartId: cart.id, EscapeRoomsId });
+  const updatedCart = await getCartByBuyerId({ buyerId: user.id });
+  res.send(updatedCart);
+});
+
 module.exports = cartRouter;
