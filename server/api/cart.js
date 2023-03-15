@@ -35,7 +35,7 @@ cartRouter.get('/:buyerId', async (req, res, next) => {
 cartRouter.post('/api/carts/', async (req, res) => {
   const user = await getUserByToken(req.headers.authorization);
   const cart = await getCartByBuyerId({ buyerId: user.id });
-  const newCart = await purchaseCart({ cartId: cart.id, userId: user.id });
+  const newCart = await purchaseCart({ cartId: cart.id, buyerId: user.id });
   res.send(newCart);
 });
 
