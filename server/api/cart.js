@@ -1,5 +1,13 @@
 const express = require('express');
-const { getCartByBuyerId, getUserByToken, addProductsToCart } = require('../db');
+
+const { 
+  getCartByBuyerId, 
+  getUserByToken, 
+  addProductsToCart, 
+  deleteRoomFromCart, 
+  purchaseCart 
+} = require('../db');
+
 const cartRouter = express.Router();
  
 cartRouter.get('/', async (req, res, next) => {
@@ -21,6 +29,14 @@ cartRouter.get('/:buyerId', async (req, res, next) => {
   catch(ex){
     next(ex);
   }
+});
+
+//purchase route
+cartRouter.post('/api/carts/', async (req, res) => {
+  const user = await getUserByToken(req.headers.authorization);
+  const cart = await getCartByBuyerId({ buyerId: user.id });
+  const newCart = await purchaseCart({ cartId: cart.id, userId: user.id });
+  res.send(newCart);
 });
 
 cartRouter.post('/:EscapeRoomsId', async (req, res) => {
