@@ -7,14 +7,35 @@
   list-style: none;
 }
 
-html{
+html, body{
   background-color:	#C0C0C0;
-  height: 100%;
+}
+body{
+  display: flex;
+  flex-direction: column;
+}
+.App {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-/*========== Header ==========*/
+footer{
+  position: sticky;
+  top: 100%;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to right, #00093c, #2d0b00);
+  color: #fff;
+  padding: 60px 0 30px;
+  border-top-left-radius: 125px;
+  font-size: 13px;
+  line-height: 20px;
+}
 header{
-  position: fixed;
+  position: sticky;
   width: 100%;
   top: 0;
   left: 0;
@@ -24,8 +45,16 @@ header{
   align-items: center;
   justify-content: space-between;
   padding: 35px 15%;
-  background: transparent;
+  background: linear-gradient(to right, #00093c, #2d0b00);
 }
+main{
+ display: flex;
+ justify-content: center;
+ position: sticky;
+}
+
+/*========== Header ==========*/
+
 .logo {
   font-family: 'Nabla', cursive;
   font-size: 40px;
@@ -119,18 +148,6 @@ nav{
   justify-content: space-around;
 }
 /*========== FOOTER ==========*/
-footer{
-  width: 100%;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  background: linear-gradient(to right, #00093c, #2d0b00);
-  color: #fff;
-  padding: 60px 0 30px;
-  border-top-left-radius: 125px;
-  font-size: 13px;
-  line-height: 20px;
-}
 .row{
   width: 85%;
   margin: auto;
@@ -260,18 +277,10 @@ hr{
 
 
  /*========== Sign Up ==========*/
-.formBody{
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: static;
-  min-height: 70%;
-}
 
 .containerSignUp{
   margin: 0 auto;
-  position: fixed;
+  position: sticky;
   padding: 40px;
   border-radius: 20px;
   border: 8px solid #C0C0C0;
@@ -373,21 +382,38 @@ border: 1px solid #ff9514;
 font-weight: 500;
 color: #fff;
 }
- /*========== Login Form ==========*/
- .loginForm {
-  display: flex;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
-  position: static;
-  min-height: 50%;
- }
-  /*========== EscapeRoom Form ==========*/
-  .roomForm {
-    display: flex;
-    width: 100%;
-    justify-content: center;
-    align-items: center;
-    position: static;
-    min-height: 50%;
-   }
+ /*========== Home ==========*/
+ .gallery {
+  --n: 3; /* number of rows*/
+  --m: 3; /* number of columns */
+  --h: calc((100vh - (var(--n) - 1)*var(--g))/var(--n));
+  --w: calc((100vw - (var(--m) - 1)*var(--g))/var(--m)); 
+  --g: 10px;  /* control the gap */
+  --f: 1.5;   /* control the scale factor */
+  
+  display: grid;
+  gap: var(--g);
+  width: 100vw;
+  height: 100vh;
+  grid-template-columns: repeat(var(--m),auto);
+}
+
+.gallery > img {
+  width: 0;
+  height: 0;
+  min-height: 100%;
+  min-width: 100%;
+  object-fit: cover;
+  cursor: pointer;
+  filter: grayscale(80%);
+  transition: .35s linear;
+}
+
+.gallery img:hover{
+  filter: grayscale(0);
+  width:  calc(var(--w)*var(--f));
+  height: calc(var(--h)*var(--f));
+}
+
+
+

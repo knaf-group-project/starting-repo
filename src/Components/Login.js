@@ -16,7 +16,7 @@ const Login = ({ login })=> {
     setPassword('')
   }
   return (
-<div className='formBody'>
+<main>
   <div className='containerSignUp'>
       <form className='registerSubmit' onSubmit={_login}>
         <h2>Login</h2>
@@ -47,7 +47,7 @@ const Login = ({ login })=> {
         <p>Not a member? <a href="#/Register" className='login'>Sign up now</a></p>
       </form>
     </div>
-  </div>
+  </main>
   );
 };
 

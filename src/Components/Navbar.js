@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-const Navbar = ({ auth, logout }) => {
+const Navbar = ({ auth, logout, cart }) => {
   useEffect(() => {
     const menu = document.querySelector('#menu-icon');
     const navbar = document.querySelector('.navbar');
@@ -40,6 +40,8 @@ const Navbar = ({ auth, logout }) => {
             <div className='welcome'>
               Hello {auth.username}
               <button onClick={ logout }> Logout </button>
+              <span> | </span>
+              <Link to="/cart">Cart ({cart.EscapeRooms.length})</Link>
             </div>
           ) : (
             <>

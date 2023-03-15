@@ -11,7 +11,7 @@ const Register = ({ register }) => {
   };
 
   return (
-    <div className='formBody'>
+    <main>
       <div className='containerSignUp'>
           <form className='registerSubmit' onSubmit={registerSubmit}>
             <h2>Sign Up</h2>
@@ -42,7 +42,7 @@ const Register = ({ register }) => {
             <p>Already a member ? <a href="#/Login" className='login'>Login in</a></p>
           </form>
       </div>
-    </div>
+  </main>
   );
 };
 

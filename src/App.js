@@ -14,9 +14,9 @@ import {
   EscapeRooms,
   EscapeRoom,
   NavBar,
-  Register
+  Register,
+  Footer
 } from './Components'
-import Footer from './Components/Footer';
 
 
 
@@ -122,7 +122,8 @@ const fetchEscapeRooms = async () => {
 
   return (
     <>
-      <NavBar auth={auth} logout={logout} />
+    <div className='App'>
+      <NavBar auth={auth} logout={logout} cart={cart}/>
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/EscapeRooms/:id' element={<EscapeRoom setCart={setCart} rooms={rooms} cart={cart} />} />
@@ -139,8 +140,9 @@ const fetchEscapeRooms = async () => {
         />
         <Route path='/Register' element={<Register setAuth={setAuth} register={register} />} />
         <Route path='/login' element={<Login login={login} />} />
-      </Routes>
-      <Footer />
+        </Routes>
+        <Footer/>
+      </div>
     </>
   );
 };

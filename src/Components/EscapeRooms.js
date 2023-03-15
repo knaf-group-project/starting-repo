@@ -17,8 +17,6 @@ const EscapeRooms = ({ rooms , cart, setCart, auth}) => {
          setCart(updatedCart);
     }
     return (
-        <div className='roomForm'>
-
             <ul>
                 <div>Cart ({cart.EscapeRooms.length})</div>
                 {
@@ -37,11 +35,11 @@ const EscapeRooms = ({ rooms , cart, setCart, auth}) => {
                                     Add to Cart
                                 </button>
                             </div>
+                            
                         )
                     })
                 }
             </ul>
-        </div>
     )
 }
 
