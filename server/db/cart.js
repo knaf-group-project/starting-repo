@@ -15,7 +15,6 @@ const createCart = async({ buyerId }) => {
   }
 }
 
-///ID might cause error 
 const getCartByBuyerId = async ({ buyerId }) => {
     let SQL = `
       SELECT * FROM cart
@@ -43,28 +42,6 @@ const getCartByBuyerId = async ({ buyerId }) => {
     return cart;
 };
 
-const addEscapeRoomToCart = async ({ cartId, EscapeRoomsId})=>{
-//check if escape room is already in cart
-// const checkSQL = `
-//   SELECT * FROM cart_products
-//   WHERE cartId = $1 And EscapeRoomsId = $2
-// `;
-
-// const checkResponse = await client.query(checkSQL, [cartId, EscapeRoomsId]);
-// if(checkResponse.rows.length){
-//   await client.query(
-//     `UPDATE cart_products WHERE cartId = $1 AND EscapeRoomsId = $2`
-//   )`
-// }
-
-  const SQL = 
-  `INSERT INTO cart_products(cartId, EscapeRoomsId,)
-    VALUES($1, $2)
-    RETURNING *
-  `;
-  const response = await client.query(SQL, [EscapeRoomsId, cartId])
-  return;
-}
 
 const getCart = async() => {
     const SQL = `
