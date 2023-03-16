@@ -55,7 +55,7 @@ const getCart = async() => {
 // purchase cart
 const purchaseCart = async ({ cartId, buyerId }) => {
   const SQL = `
-  UPDATE carts
+  UPDATE cart
   SET is_active = false
   WHERE id = $1
   `;

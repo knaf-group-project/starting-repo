@@ -55,6 +55,7 @@ const Cart = ({ cart, setCart }) => {
     <button
       onClick={async () => {
         const newCart = await purchaseCart();
+        setCart(newCart)
       }}
     >
       PURCHASE CART
