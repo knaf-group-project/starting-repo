@@ -25,6 +25,7 @@ const App = () => {
   const [auth, setAuth] = useState({});
   const [cart , setCart] = useState({EscapeRooms: []});
   const [rooms, setRooms] = useState([]);
+  const [cartCount, setCartCount] = useState(0)
   const location = useLocation();
   const navigate = useNavigate();
 

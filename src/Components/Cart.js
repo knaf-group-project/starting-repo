@@ -28,7 +28,8 @@ const Cart = ({ cart, setCart }) => {
           },
         });
         const newCart = await response.json();
-        setCart(newCart);
+        setCart({EscapeRooms: []});
+
       };
 
     console.log('cart:', cart);
@@ -55,7 +56,7 @@ const Cart = ({ cart, setCart }) => {
     <button
       onClick={async () => {
         const newCart = await purchaseCart();
-        setCart(newCart)
+     
       }}
     >
       PURCHASE CART
