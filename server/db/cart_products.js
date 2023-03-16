@@ -24,7 +24,7 @@ async function addProductsToCart({ cartId, EscapeRoomsId}) {
       DELETE FROM cart_products
       WHERE "cartId" = $1 AND "EscapeRoomsId" = $2
     `;
-    await client.query(SQL, [EscapeRoomsId, cartId]);
+    await client.query(SQL, [cartId, EscapeRoomsId]);
     return;
   };
 

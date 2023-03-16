@@ -43,6 +43,7 @@ const Cart = ({ cart, setCart }) => {
             <button
               onClick={async () => {
                 const updatedCart = await deleteRoomFromCart(room.id);
+                setCart(updatedCart);
               }}
             >
               Remove Room
