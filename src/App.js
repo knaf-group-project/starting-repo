@@ -124,10 +124,10 @@ const fetchEscapeRooms = async () => {
   return (
     <>
     <div className='App'>
-      <NavBar auth={auth} logout={logout} cart={cart}/>
+      <NavBar auth={auth} rooms={rooms} logout={logout} cart={cart}/>
       <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/EscapeRooms/:id' element={<EscapeRoom setCart={setCart} rooms={rooms} cart={cart} />} />
+        <Route path='/' element={<Home rooms={rooms}/>} />
+        <Route path='/EscapeRooms/:id' element={<EscapeRoom setCart={setCart} rooms={rooms} cart={cart} auth={auth} />} />
         <Route
           path='/EscapeRooms'
           element={
@@ -142,7 +142,6 @@ const fetchEscapeRooms = async () => {
         <Route path='/Register' element={<Register setAuth={setAuth} register={register} />} />
         <Route path='/login' element={<Login login={login} />} />
         <Route path='/Cart' element={<Cart cart={cart} setCart={setCart} />} />
-
         </Routes>
         <Footer/>
       </div>
