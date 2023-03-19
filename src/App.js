@@ -16,8 +16,9 @@ import {
   NavBar,
   Register,
   Footer,
-  Cart
+  Cart,
 } from './Components'
+import About from './Components/About';
 
 
 
@@ -25,7 +26,6 @@ const App = () => {
   const [auth, setAuth] = useState({});
   const [cart , setCart] = useState({EscapeRooms: []});
   const [rooms, setRooms] = useState([]);
-  const [cartCount, setCartCount] = useState(0)
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -140,6 +140,7 @@ const fetchEscapeRooms = async () => {
             />
           } 
         />
+        <Route path='/About' element={<About/>} />
         <Route path='/Register' element={<Register setAuth={setAuth} register={register} />} />
         <Route path='/login' element={<Login login={login} />} />
         <Route path='/Cart' element={<Cart cart={cart} setCart={setCart} />} />
