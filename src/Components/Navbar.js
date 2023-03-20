@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-const Navbar = ({ auth, logout, cart }) => {
+const Navbar = ({ auth, rooms, logout, cart }) => {
+
   useEffect(() => {
     const menu = document.querySelector('#menu-icon');
     const navbar = document.querySelector('.navbar');
@@ -13,7 +14,10 @@ const Navbar = ({ auth, logout, cart }) => {
     });
 
     links.forEach((link) => {
-      link.addEventListener('click', () => {
+      link.addEventListener('click', (event) => {
+        if (link.classList.contains('dropbtn')) {
+          event.preventDefault();
+        }
         menu.classList.remove('bx-x');
         navbar.classList.remove('open');
       });
@@ -31,8 +35,16 @@ const Navbar = ({ auth, logout, cart }) => {
       <nav className="navbar">
         <li><Link to='/'>Home</Link></li>
         <li><Link to='/About'>About</Link></li>
-        <li><Link to='/EscapeRooms'>Escape Rooms</Link></li>
-        <li><Link to='/Register'>Sign up</Link></li>
+        <li className="dropdown">
+          <a className="dropbtn">Escape Rooms</a>
+          <div className="dropdown-content">
+            {rooms.map(room => (
+              <Link key={room.id} to={`/EscapeRooms/${room.id}`}>{room.name}</Link>
+            ))}
+          </div>
+        </li>
+
+        {auth.id ? null : <li><Link to='/Register'>Sign up</Link></li>}
       </nav>
 
       <div className="header-btn">

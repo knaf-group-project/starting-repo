@@ -1,67 +1,96 @@
-import React from "react";
+import React, { useState } from 'react';
+import axios from 'axios';
 
 const Cart = ({ cart, setCart }) => {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [number, setNumber] = useState('');
 
-    const deleteRoomFromCart = async (EscapeRoomsId) => {
-        const token = window.localStorage.getItem('token');
-        if (!token) return;
-        const response = await fetch(`/api/cart/${EscapeRoomsId}`, {
-          method: 'DELETE',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: token,
-          },
-        });
-        const updatedCart = await response.json();
-        setCart(updatedCart);
-        return updatedCart;
-      };
-    
-      const purchaseCart = async () => {
-        const token = window.localStorage.getItem('token');
-        if (!token) return;
-        const response = await fetch(`/api/cart`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: token,
-          },
-        });
-        const newCart = await response.json();
-        setCart({EscapeRooms: []});
+  const deleteRoomFromCart = async (EscapeRoomsId) => {
+    const token = window.localStorage.getItem('token');
+    if (!token) return;
+    const response = await fetch(`/api/cart/${EscapeRoomsId}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: token,
+      },
+    });
+    const updatedCart = await response.json();
+    setCart(updatedCart);
+    return updatedCart;
+  };
 
-      };
+  const purchaseCart = async () => {
+    const token = window.localStorage.getItem('token');
+    if (!token) return;
+    const response = await fetch(`/api/cart`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: token,
+      },
+      body: JSON.stringify({ name, email, number }),
+    });
+    const newCart = await response.json();
+    setCart({ EscapeRooms: [] });
+  };
 
-    console.log('cart:', cart);
-    return (
-    <div>
-        <h2>My Escape Room Purchases</h2>
+  const isFormValid = name && email && number;
+
+  console.log('cart:', cart);
+  return (
+    <main>
+      <div className="containerSignup">
+        <div className="cart">
+          <i className="bx bx-cart"></i>
+        </div>
         <ul>
-        {cart.EscapeRooms?.map((room) => {
-          return (
-            <li key={room.id}>
-            {room.name}
+          {cart.EscapeRooms?.map((room) => {
+            return (
+              <li key={room.id}>
+                {room.name}
+                <button
+                  onClick={async () => {
+                    const updatedCart = await deleteRoomFromCart(room.id);
+                    setCart(updatedCart);
+                  }}
+                >
+                  Remove Room
+                </button>
+              </li>
+            );
+          })}
+        </ul>
+        <form>
+          <h3>Contact info</h3>
+          <label>
+            Name:
+            <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
+          </label>
+          <label>
+            Email:
+            <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+          </label>
+          <label>
+            Number:
+            <input type="tel" value={number} onChange={(e) => setNumber(e.target.value)} />
+          </label>
+          <div className="inputBox">
             <button
+              className="submit"
+              disabled={!isFormValid}
               onClick={async () => {
-                const updatedCart = await deleteRoomFromCart(room.id);
-                setCart(updatedCart);
+                const newCart = await purchaseCart();
               }}
             >
-              Remove Room
+              PURCHASE CART
             </button>
-          </li>
-        );
-      })}
-    </ul>
-    <button
-      onClick={async () => {
-        const newCart = await purchaseCart();
-     
-      }}
-    >
-      PURCHASE CART
-    </button>
-  </div>
-);
+          </div>
+        </form>
+      </div>
+    </main>
+  );
 };
- export default Cart
+
+export default Cart;

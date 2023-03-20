@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import {
-  Link,
   Routes,
   Route,
-  HashRouter,
   useLocation,
   useNavigate
 } from 'react-router-dom';
@@ -11,7 +9,6 @@ import axios from 'axios';
 import {
   Home,
   Login,
-  EscapeRooms,
   EscapeRoom,
   NavBar,
   Register,
@@ -24,25 +21,25 @@ import About from './Components/About';
 
 const App = () => {
   const [auth, setAuth] = useState({});
-  const [cart , setCart] = useState({EscapeRooms: []});
+  const [cart, setCart] = useState({ EscapeRooms: [] });
   const [rooms, setRooms] = useState([]);
   const location = useLocation();
   const navigate = useNavigate();
 
-  useEffect(()=> {
-    if(auth.id){
-      if(location.pathname.toLowerCase() === '/login'){
-        navigate('/EscapeRooms');
+  useEffect(() => {
+    if (auth.id) {
+      if (location.pathname.toLowerCase() === '/login') {
+        navigate('/');
       }
-      if(location.pathname.toLowerCase() === '/register'){
-        navigate('/EscapeRooms');
+      if (location.pathname.toLowerCase() === '/register') {
+        navigate('/');
       }
     }
   }, [auth]);
 
   console.log('Escape Rooms:', rooms)
   console.log('CART:', cart)
-  
+
   const attemptLogin = () => {
     const token = window.localStorage.getItem('token');
     if (token) {
@@ -55,27 +52,27 @@ const App = () => {
           }
         }
       )
-      .then(response => response.json())
-      .then(user => {
-        if(user.id){
-          setAuth(user);
-          fetch(`/api/cart/${user.id}`)
-            .then(response => response.json())
-            .then(cart => setCart(cart));
-        }
-        else {
-          window.localStorage.removeItem('token');
-        }
+        .then(response => response.json())
+        .then(user => {
+          if (user.id) {
+            setAuth(user);
+            fetch(`/api/cart/${user.id}`)
+              .then(response => response.json())
+              .then(cart => setCart(cart));
+          }
+          else {
+            window.localStorage.removeItem('token');
+          }
 
-      });
+        });
+    }
+  };
+
+  const fetchEscapeRooms = async () => {
+    const response = await fetch('/api/EscapeRooms');
+    const rooms = await response.json();
+    setRooms(rooms)
   }
-};
-
-const fetchEscapeRooms = async () => {
-  const response = await fetch('/api/EscapeRooms');
-  const rooms = await response.json();
-  setRooms(rooms)
-}
 
   useEffect(() => {
     attemptLogin();
@@ -124,28 +121,59 @@ const fetchEscapeRooms = async () => {
 
   return (
     <>
-    <div className='App'>
-      <NavBar auth={auth} rooms={rooms} logout={logout} cart={cart}/>
-      <Routes>
-        <Route path='/' element={<Home rooms={rooms}/>} />
-        <Route path='/EscapeRooms/:id' element={<EscapeRoom setCart={setCart} rooms={rooms} cart={cart} auth={auth} />} />
-        <Route
-          path='/EscapeRooms'
-          element={
-            <EscapeRooms
-              setCart={setCart}
-              rooms={rooms}
-              cart={cart}
-              auth={ auth }
-            />
-          } 
-        />
-        <Route path='/About' element={<About/>} />
-        <Route path='/Register' element={<Register setAuth={setAuth} register={register} />} />
-        <Route path='/login' element={<Login login={login} />} />
-        <Route path='/Cart' element={<Cart cart={cart} setCart={setCart} />} />
+      <div className='App'>
+        <NavBar auth={auth} rooms={rooms} logout={logout} cart={cart} />
+        <Routes>
+         <Route path='/About' element={<About/>} />
+
+          <Route
+            path='/'
+            element={
+              <Home
+                rooms={rooms}
+              />
+            }
+          />
+          <Route
+            path='/EscapeRooms/:id'
+            element={
+              <EscapeRoom
+                setCart={setCart}
+                rooms={rooms}
+                cart={cart}
+                auth={auth}
+              />
+            }
+          />
+          <Route
+            path='/Register'
+            element={
+              <Register
+                setAuth={setAuth}
+                register={register}
+              />
+            }
+          />
+          <Route
+            path='/login'
+            element={
+              <Login
+                login={login}
+              />
+            }
+          />
+          <Route
+            path='/Cart'
+            element={
+              <Cart
+                cart={cart}
+                setCart={setCart}
+              />
+            }
+          />
+
         </Routes>
-        <Footer/>
+        <Footer />
       </div>
     </>
   );
