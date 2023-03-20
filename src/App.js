@@ -13,8 +13,9 @@ import {
   NavBar,
   Register,
   Footer,
-  Cart
+  Cart,
 } from './Components'
+import About from './Components/About';
 
 
 
@@ -123,6 +124,8 @@ const App = () => {
       <div className='App'>
         <NavBar auth={auth} rooms={rooms} logout={logout} cart={cart} />
         <Routes>
+         <Route path='/About' element={<About/>} />
+
           <Route
             path='/'
             element={
@@ -168,6 +171,7 @@ const App = () => {
               />
             }
           />
+
         </Routes>
         <Footer />
       </div>
