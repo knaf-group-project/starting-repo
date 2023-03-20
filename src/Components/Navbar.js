@@ -27,6 +27,8 @@ const Navbar = ({ auth, rooms, logout, cart }) => {
   return (
     <header className="header">
       <a href="#" className="logo">
+        <img className='logoPic' src='/static/knafpics/KNAF_Logo.jpeg' alt='logo'></img>
+        <span></span>
         Escape Room
       </a>
 
