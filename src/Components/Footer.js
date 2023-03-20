@@ -6,7 +6,7 @@ export default function Footer() {
       <div className='row'>
         <div className='col'>
           <h2 className='logo2'>ESCAPE ROOM</h2>
-          <p>Subscribe for more news about Escape Rooms. Follow us on social medias for more. something idk we can come up with something</p>
+          <p>Subscribe for more news about Escape Room. Follow us on social medias for more content</p>
         </div>
         <div className='col'>
           <h3>Office <div className='underline'><span></span></div></h3>
