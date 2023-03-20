@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 
 const Cart = ({ cart, setCart }) => {
   const [name, setName] = useState('');
@@ -38,7 +37,6 @@ const Cart = ({ cart, setCart }) => {
 
   const isFormValid = name && email && number;
 
-  console.log('cart:', cart);
   return (
     <main>
       <div className="containerSignup">
@@ -64,6 +62,7 @@ const Cart = ({ cart, setCart }) => {
         </ul>
         <form>
           <h3>Contact info</h3>
+          <br></br>
           <label>
             Name:
             <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
@@ -76,6 +75,13 @@ const Cart = ({ cart, setCart }) => {
             Number:
             <input type="tel" value={number} onChange={(e) => setNumber(e.target.value)} />
           </label>
+          <br></br>
+          <div>
+            <p>
+              *Please note, the total price is $37.99 per person, per room.*
+            </p>
+          </div>
+          <br></br>
           <div className="inputBox">
             <button
               className="submit"

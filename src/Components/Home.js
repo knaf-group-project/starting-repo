@@ -24,6 +24,7 @@ const Home = ({rooms}) => {
               <div className="overlay">
                 <h3>{room.name}</h3>
                 <p>{room.briefdescription}</p>
+                <p>{room.price}</p>
               </div>
             </Link>
           </div>

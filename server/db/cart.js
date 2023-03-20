@@ -29,15 +29,12 @@ const getCartByBuyerId = async ({ buyerId }) => {
       response = await client.query(SQL, [buyerId]);
     }
     const cart = response.rows[0];
-    console.log('THE CART:', cart )
-    //get products, and attach to cart
     const productsSQL = `
     SELECT * FROM cart_products
     LEFT JOIN EscapeRooms ON cart_products."EscapeRoomsId" = EscapeRooms.id
     WHERE cart_products."cartId" = $1
     `;
     const EscapeRoomsResponse = await client.query(productsSQL, [cart.id]);
-    console.log('CART PRODUCTS:', EscapeRoomsResponse.rows)
     cart.EscapeRooms = EscapeRoomsResponse.rows;
     return cart;
 };

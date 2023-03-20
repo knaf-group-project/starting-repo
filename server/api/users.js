@@ -5,7 +5,6 @@ const { JWT_SECRET } = process.env
 
 const {
     createUser,
-    authenticate,
     getUserByToken,
     getUserByUsername
 } = require('../db/User')
@@ -21,7 +20,7 @@ router.use(async (req, res, next) => {
         const { username } = jwt.verify(token, JWT_SECRET);
   
         if (username) {
-          req.user = await getUserByToken({ username }); // fix this getUserByToken function
+          req.user = await getUserByToken({ username });
           next();
         } else {
           res.status(401);
@@ -45,24 +44,6 @@ router.post('/register', async (req, res, next) => {
 
     try {
         const user = await getUserByUsername(username);
-
-      /*
-        if (user) {
-            next({
-                error: 'Error',
-                name: 'UserExistsError',
-                message: `User ${username} is already taken.`
-            });
-        }
-
-        if (password.length < 8) {
-            next({
-                error: 'Error',
-                name: 'PasswordLengthError',
-                message: 'Password Too Short!'
-            })
-        }
-        */
 
         const creatingUser = await createUser({
             username, password

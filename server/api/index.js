@@ -1,7 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const { getUserByToken } = require('../db/User');
-const { getCartByBuyerId } = require('../db/cart');
 
 // Router: /api/auth
 router.use('/auth', require('./auth'));
@@ -9,10 +7,6 @@ router.use('/auth', require('./auth'));
 // ROUTER: /api/User
 const usersRouter = require('./users');
 router.use('/users', usersRouter);
-
-// ROUTER: /api/Register
-// const registerRouter = require('./users/register');
-// router.use('/users/register', registerRouter);
 
 // ROUTER: /api/EscapeRooms
 const EscapeRoomsRouter = require('./EscapeRooms');

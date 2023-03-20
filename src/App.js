@@ -37,9 +37,6 @@ const App = () => {
     }
   }, [auth]);
 
-  console.log('Escape Rooms:', rooms)
-  console.log('CART:', cart)
-
   const attemptLogin = () => {
     const token = window.localStorage.getItem('token');
     if (token) {
@@ -94,7 +91,6 @@ const App = () => {
       }
     )
       .then(response => {
-        console.log(response)
         console.log('success')
         const data = response.data;
         window.localStorage.setItem('token', data.token);
@@ -113,7 +109,6 @@ const App = () => {
       .then(response => {
         console.log('success!!!')
         const data = response.data;
-        console.log(data)
         window.localStorage.setItem('token', response.data.token);
         attemptLogin();
       });
@@ -124,8 +119,11 @@ const App = () => {
       <div className='App'>
         <NavBar auth={auth} rooms={rooms} logout={logout} cart={cart} />
         <Routes>
-         <Route path='/About' element={<About/>} />
-
+          <Route
+            path='/About'
+            element={
+              <About />
+            } />
           <Route
             path='/'
             element={

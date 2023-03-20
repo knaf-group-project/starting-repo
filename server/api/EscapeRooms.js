@@ -1,5 +1,4 @@
 const express = require('express');
-const { useParams } = require('react-router-dom');
 const EscapeRoomsRouter = express.Router();
 
 
@@ -12,11 +11,4 @@ EscapeRoomsRouter.get('/', async (req, res, next) => {
         next(error);
     }
 })
-
-// ** work on this to get all escape rooms 
-
-// EscapeRoomsRouter.post('/:roomId', async (req, res, next) => {
-//     const id = useParams().id
-    
-// } )
 module.exports = EscapeRoomsRouter;

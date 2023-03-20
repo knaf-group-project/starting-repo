@@ -2,8 +2,6 @@ const client = require('./client');
 
 
 async function addProductsToCart({ cartId, EscapeRoomsId}) {
-  console.log(cartId)
-  console.log(EscapeRoomsId)
     try {
       const { rows: [ cart_products ] } = await client.query(`
         INSERT INTO cart_products ("cartId", "EscapeRoomsId") 

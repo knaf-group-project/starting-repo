@@ -1,7 +1,6 @@
 const client = require('./client');
-const { createEscapeRooms, getRooms } = require('./EscapeRooms');
+const { createEscapeRooms } = require('./EscapeRooms');
 const { createCart } = require('./cart')
-const { addProductsToCart } = require('./cart_products')
 const {
   getUserByToken,
   createUser,
@@ -29,7 +28,8 @@ const syncTables = async()=> {
       id SERIAL PRIMARY KEY,
       name VARCHAR(255) UNIQUE NOT NULL,
       briefDescription TEXT,
-      mainDescription TEXT
+      mainDescription TEXT,
+      price TEXT
     );
     
     CREATE TABLE cart(
@@ -95,31 +95,37 @@ async function createAllEscapeRooms() {
     const escapeRoomsToCreate = [
       {
         name: "Escape Space",
+        price: "$37.99",
         briefDescription: "You are trapped on a spaceship and must solve puzzles to repair the ship's systems and make it back to Earth.",
         mainDescription: "Your mission to explore the galaxy has gone awry when your spaceship is damaged by a meteor shower. You are now stranded in space and must repair your ship's systems in order to make it back to Earth before you run out of oxygen.",
       },
       {
         name: "Escape Factory",
+        price: "$37.99",
         briefDescription: "You are locked in a mysterious factory and must solve puzzles to escape before time runs out.",
         mainDescription: "You've been lured into a mysterious factory by a mad scientist who wants to test your intelligence. He has locked you in and given you one hour to escape before his experiments begin.",
       },
       {
         name: "Escape Gallery",
+        price: "$37.99",
         briefDescription: "You are an art thief who has been trapped in a museum and must solve puzzles to escape before the police arrive.",
         mainDescription: "You're a master art thief who has finally found your next target - a rare painting hidden in a museum. However, when the security system is triggered, you find yourself locked inside and must solve the puzzles to escape before the police arrive.",
       },
       {
         name: "Escape Library",
+        price: "$37.99",
         briefDescription: "You are locked in an old library and must solve puzzles to uncover a secret hidden within its walls.",
         mainDescription: "The old library is full of mysteries and secrets, and you've been tasked with uncovering a hidden treasure within its walls. However, when the doors lock behind you, you realize that you are trapped and must solve the puzzles within the library to uncover the treasure and escape.",
       },
       {
         name: "Escape Office",
+        price: "$37.99",
         briefDescription: "You are a corporate spy who has been locked in an office and must solve puzzles to retrieve important documents before time runs out.",
         mainDescription: "You're a corporate spy who has been hired to steal important documents from a rival company's office. However, when the doors lock behind you, you realize that you're trapped and must solve the puzzles to retrieve the documents and escape before time runs out.",
       },
       {
         name: "Escape Tavern",
+        price: "$37.99",
         briefDescription: "You are a pirate who has been locked in a tavern and must solve puzzles to find your treasure map before time runs out.",
         mainDescription: "You're a notorious pirate who has hidden your treasure map in a secret location within a tavern. However, when the doors lock behind you, you realize that you've been double-crossed and must solve the puzzles to find the map and escape before time runs out.",
       }
