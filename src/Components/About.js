@@ -4,7 +4,7 @@ const About = () => {
     return (
         <div className='aboutPage'>
             <h2 className='aboutTitle'>What is an Escape Room?</h2>
-                <p className='aboutP'>Escape rooms are real life adventures wehre you and your fellow teammates have an hour to "break out" of a room by finding clues to crack codes, solve riddles, and piece together puzzles. The game origincated in Jpan and is based off escape the room video games created by Toshimitsu Takagi in 2005.</p>
+                <p className='aboutP'>Escape rooms are real life adventures wehre you and your fellow teammates have an hour to "break out" of a room by finding clues to crack codes, solve riddles, and piece together puzzles. The game origincated in Japan and is based off escape the room video games created by Toshimitsu Takagi in 2005.</p>
             <h2 className='aboutTitle'>How to Play?</h2>
                 <p className='aboutP'>There is no perfect or one way to play an escape room. Just need to remember these three things...</p>
                     <ol className='aboutList'>

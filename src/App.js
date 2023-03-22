@@ -10,12 +10,12 @@ import {
   Home,
   Login,
   EscapeRoom,
-  NavBar,
   Register,
   Footer,
   Cart,
+  About
 } from './Components'
-import About from './Components/About';
+import { NavBar } from '.src/Components/NavBar'
 
 
 
