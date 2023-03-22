@@ -9,7 +9,7 @@ import axios from 'axios';
 import {
   Home,
   Login,
-  NavBar,
+  Navbar,
   EscapeRoom,
   Register,
   Footer,
@@ -116,7 +116,7 @@ const App = () => {
   return (
     <>
       <div className='App'>
-        <NavBar auth={auth} rooms={rooms} logout={logout} cart={cart} />
+        <Navbar auth={auth} rooms={rooms} logout={logout} cart={cart} />
         <Routes>
           <Route
             path='/About'
