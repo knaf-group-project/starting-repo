@@ -9,14 +9,13 @@ import axios from 'axios';
 import {
   Home,
   Login,
+  NavBar,
   EscapeRoom,
   Register,
   Footer,
   Cart,
   About
 } from './Components'
-import { NavBar } from '.src/Components/NavBar'
-
 
 
 const App = () => {
